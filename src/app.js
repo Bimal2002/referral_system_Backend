@@ -6,13 +6,11 @@ const config = require("./config");
 dotenv.config();
 connectDB();
 
-
 const app = express();
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api", require("./routes/referralRoutes")); // Instead of "/api/auth"
-
+app.use("/api", require("./routes/referralRoutes")); 
 
 app.listen(config.PORT, () => console.log(`Server running on port ${config.PORT}`));
 

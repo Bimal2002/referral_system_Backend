@@ -7,28 +7,44 @@ const bcrypt = require("bcrypt");
 
 
 
-// Fetch User Referrals
 const getReferrals = async (req, res) => {
     try {
-        const referrals = await Referral.find({ referrerId: req.user.id })
-            .populate("referredUserId", "username email createdAt");
-        res.json({ referrals });
+        const userId = req.user.id; 
+
+        const referrals = await Referral.find({ referrerId: userId })
+            .populate("referredUsers.userId", "username email referralCode") 
+            .exec();
+
+        res.status(200).json({ referrals });
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
 };
 
-// Fetch Referral Statistics
+
+
+
 const getReferralStats = async (req, res) => {
     try {
-        const totalReferrals = await Referral.countDocuments({ referrerId: req.user.id });
-        const successfulReferrals = await Referral.countDocuments({ referrerId: req.user.id, status: "successful" });
+        const referral = await Referral.findOne({ referrerId: req.user.id });
+
+        if (!referral) {
+            return res.status(404).json({ message: "No referral data found" });
+        }
+
+        const totalReferrals = referral.referredUsers.length;
+
+        const successfulReferrals = referral.referredUsers.filter(
+            (referredUser) => referredUser.status === "successful"
+        ).length;
 
         res.json({ totalReferrals, successfulReferrals });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 
 // View All Users (Admin Purpose)
 const getAllUsers = async (req, res) => {
