@@ -1,18 +1,25 @@
+Here’s the formatted and consolidated version of your **README.md** file. You can copy this in one go:
+
+```markdown
 # Referral System Backend
 
-This project provides a backend API for a referral system where users can register, log in, refer others, and track referral statistics. The system supports JWT authentication, referral tracking, and password reset functionality.
+This project provides a backend API for a referral system where users can register, log in, refer others, and track referral statistics. The system supports **JWT authentication**, **referral tracking**, and **password reset functionality**.
+
+---
 
 ## Base URL
 
-The base URL for the API is:   https://referral-system-backend-bimal-gayalis-projects.vercel.app/
+The base URL for the API is:
 
-
+```
+https://referral-system-backend-bimal-gayalis-projects.vercel.app/
+```
 
 ---
 
 ## Authentication
 
-Authentication is handled via JWT (JSON Web Tokens). After a successful login, a token will be issued that needs to be included in the `Authorization` header as `Bearer <token>` for accessing protected routes.
+Authentication is handled via **JWT (JSON Web Tokens)**. After a successful login, a token will be issued that needs to be included in the `Authorization` header as `Bearer <token>` for accessing protected routes.
 
 ---
 
@@ -33,15 +40,21 @@ Register a new user. Users can optionally provide a referral code to be referred
   "password": "string",
   "referralCode": "string" (optional)
 }
+```
 
-Response:
+#### **Response:**
+
+```json
 {
   "message": "User registered",
   "referralCode": "string",  // Generated referral code for the new user
   "referredBy": "string"     // Referral code of the user who referred (if applicable)
 }
+```
 
-Example Request:
+#### **Example Request:**
+
+```bash
 POST /api/auth/register
 Content-Type: application/json
 
@@ -51,50 +64,98 @@ Content-Type: application/json
   "password": "password123",
   "referralCode": "admin_user_ref"
 }
+```
 
+---
 
-2.User Login
-POST /auth/login
-Request Body:
+### **2. User Login**
+
+**POST** `/auth/login`
+
+Login the user and return a JWT token.
+
+#### **Request Body:**
+
+```json
 {
   "email": "string",
   "username": "string",
   "password": "string"
 }
-Response:
+```
+
+#### **Response:**
+
+```json
 {
   "token": "string"  // JWT token used for authentication
 }
+```
 
-3. Forgot Password
-POST /auth/forgot-password
-Request Body:
+---
+
+### **3. Forgot Password**
+
+**POST** `/auth/forgot-password`
+
+Initiate the password reset process by sending a reset token to the user's email.
+
+#### **Request Body:**
+
+```json
 {
   "email": "string"
 }
-Response:
+```
+
+#### **Response:**
+
+```json
 {
   "message": "Use this token for password reset",
   "resetToken": "string"  // Reset token sent for password reset
 }
+```
 
-4. Reset Password
-POST /auth/reset-password
-Request Body:
+---
+
+### **4. Reset Password**
+
+**POST** `/auth/reset-password`
+
+Reset the user's password using a reset token.
+
+#### **Request Body:**
+
+```json
 {
   "token": "string",
   "newPassword": "string"
 }
-Response:
+```
+
+#### **Response:**
+
+```json
 {
   "message": "Password reset successful"
 }
+```
 
-5. Get User Referrals
-GET /referrals
-Headers:
-Authorization: Bearer <JWT_Token>
-Response:
+---
+
+### **5. Get User Referrals**
+
+**GET** `/referrals`
+
+Fetch the list of referrals for the logged-in user.
+
+#### **Headers:**
+- `Authorization`: `Bearer <JWT_Token>`
+
+#### **Response:**
+
+```json
 {
   "referrals": [
     {
@@ -109,29 +170,42 @@ Response:
     }
   ]
 }
+```
 
-6. Get Referral Statistics
-GET /stats
+---
 
-  Fetch the referral statistics for the logged-in user.
+### **6. Get Referral Statistics**
 
-Headers:
- Authorization: Bearer <JWT_Token>
-Response:
+**GET** `/stats`
+
+Fetch the referral statistics for the logged-in user.
+
+#### **Headers:**
+- `Authorization`: `Bearer <JWT_Token>`
+
+#### **Response:**
+
+```json
 {
   "totalReferrals": "integer",
   "successfulReferrals": "integer"
 }
+```
 
+---
 
-7. Get All Users (Admin Only)
-GET /users
+### **7. Get All Users (Admin Only)**
+
+**GET** `/users`
 
 Fetch a list of all users in the system. This endpoint is only accessible to admin users.
 
-Headers:
-Authorization: Bearer <admin_JWT_Token>
-Response:
+#### **Headers:**
+- `Authorization`: `Bearer <admin_JWT_Token>`
+
+#### **Response:**
+
+```json
 {
   "users": [
     {
@@ -144,5 +218,99 @@ Response:
     }
   ]
 }
+```
 
+---
 
+### **8. Update Referral Status (Admin Only)**
+
+**PATCH** `/referrals/:referralId/status`
+
+Update the status of a referral (e.g., mark as successful). This endpoint is for admin use only.
+
+#### **Request Body:**
+
+```json
+{
+  "status": "string"  // "successful" or "pending"
+}
+```
+
+#### **Headers:**
+- `Authorization`: `Bearer <admin_JWT_Token>`
+
+#### **Response:**
+
+```json
+{
+  "message": "Referral status updated successfully"
+}
+```
+
+---
+
+## Error Responses
+
+All error responses follow the general format:
+
+```json
+{
+  "message": "Error message"
+}
+```
+
+- **400 Bad Request**: If the request is malformed or missing required data.
+- **401 Unauthorized**: If the JWT token is missing or invalid.
+- **404 Not Found**: If the requested resource does not exist.
+- **500 Internal Server Error**: If there is an error on the server.
+
+---
+
+## How to Use
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/referral-system-backend.git
+   cd referral-system-backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the server:
+   ```bash
+   npm start
+   ```
+
+4. The API will be accessible at `http://localhost:5000/api`.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests with improvements or bug fixes. Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
+
+---
+
+## Contact
+
+For any questions or issues, feel free to reach out to [your_email@example.com](mailto:your_email@example.com).
+```
+
+---
+
+### Key Features:
+- **Consolidated and formatted** for easy copying.
+- Added **headers** and **example requests** for clarity.
+- Included **error responses** and **how to use** sections.
+- Added a **license** and **contributing** section for completeness.
+
+You can now copy this directly into your `README.md` file! Let me know if you need further adjustments. 😊
