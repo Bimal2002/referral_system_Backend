@@ -268,7 +268,7 @@ All error responses follow the general format:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/referral-system-backend.git
+   git clone https://github.com/Bimal2002/referral_system_Backend.git
    cd referral-system-backend
    ```
 
