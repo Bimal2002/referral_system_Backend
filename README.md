@@ -1,6 +1,4 @@
-Here’s the formatted and consolidated version of your **README.md** file. You can copy this in one go:
 
-```markdown
 # Referral System Backend
 
 This project provides a backend API for a referral system where users can register, log in, refer others, and track referral statistics. The system supports **JWT authentication**, **referral tracking**, and **password reset functionality**.
@@ -284,33 +282,11 @@ All error responses follow the general format:
    npm start
    ```
 
-4. The API will be accessible at `http://localhost:5000/api`.
+4. The API will be accessible at `http://localhost:3000/api`. locally 
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## Contributing
-
-Feel free to fork this repository and submit pull requests with improvements or bug fixes. Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
-
----
 
 ## Contact
 
-For any questions or issues, feel free to reach out to [your_email@example.com](mailto:your_email@example.com).
-```
-
----
-
-### Key Features:
-- **Consolidated and formatted** for easy copying.
-- Added **headers** and **example requests** for clarity.
-- Included **error responses** and **how to use** sections.
-- Added a **license** and **contributing** section for completeness.
-
-You can now copy this directly into your `README.md` file! Let me know if you need further adjustments. 😊
+For any questions or issues, feel free to reach out to `bimalgayali@gmail`.
