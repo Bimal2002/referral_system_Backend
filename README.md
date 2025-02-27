@@ -279,10 +279,10 @@ All error responses follow the general format:
 
 3. Start the server:
    ```bash
-   npm start
+   npm run dev
    ```
 
-4. The API will be accessible at `http://localhost:3000/api`. locally 
+4. The API locally will be accessible at `http://localhost:3000` 
 
 ---
 
